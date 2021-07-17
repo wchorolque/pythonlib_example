@@ -10,7 +10,7 @@ import getpass
 import os
 import sys
 import uno 
-
+from pathlib import Path
 
 class Session():
     @staticmethod
@@ -55,13 +55,15 @@ class Session():
         return ''.join([self.UserScripts, os.sep, 'python'])
     
     
+
 # Load ~/LibreOffice/4/user/Scripts in sys.path
 user_lib = Session().UserPythonScripts
 if not user_lib in sys.path:
     sys.path.insert(0, user_lib)
     
-# Load package 'examples' in sys.path
-package_lib = os.path.join(user_lib, 'examples')
+# Load package '' in sys.path
+p = Path(__file__)
+package_lib = str(p.parent.parent)
 if not package_lib in sys.path:
     sys.path.insert(0, package_lib)
     
